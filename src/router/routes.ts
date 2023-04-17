@@ -23,6 +23,13 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/reset-password/:code',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', name: 'reset-password', component: () => import('pages/auth/ResetPasswordPage.vue') }
+    ]
+  },
+  {
     path: '/profile',
     component: () => import('layouts/MainLayout.vue'),
     children: [

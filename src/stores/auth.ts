@@ -261,6 +261,16 @@ export const useAuthStore = defineStore('auth', () => {
     await syncUser()
   }
 
+  async function resetPassword (code: string, email: string, newPassword: string) {
+    await graphql(`mutation ResetPassword($code: String!, $email: String!, $newPassword: String!) {
+      resetPassword(code: $code, email: $email, newPassword: $newPassword)
+    }`, {
+      code,
+      email,
+      newPassword
+    })
+  }
+
   const authenticated = computed(() => {
     return !!token.value
   })
@@ -286,6 +296,7 @@ export const useAuthStore = defineStore('auth', () => {
     userAvatarKeyToUrl,
     syncUser,
     verifyEmail,
+    resetPassword,
     // getters
     authenticated
   }
