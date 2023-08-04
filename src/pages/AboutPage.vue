@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="q-pa-md">
-      <h1>TODO- About</h1>
+      <h1>TODO - About</h1>
     </div>
   </q-page>
 </template>
