@@ -1,30 +1,18 @@
 import { defineStore } from 'pinia'
-import { graphql, graphqlGenerateVariableDeclarations, graphqlGenerateVariablesObject } from 'src/lib/graphql'
-import { useAuthStore } from './auth'
+import { graphql } from 'src/gql'
+import { client } from 'src/lib/graphql'
 
 export const useContactFormSubmissionStore = defineStore('contact-form-submission', () => {
-  const authStore = useAuthStore()
   async function submitContactForm (name: string, email: string, message: string) {
-    const variables = {
-      name,
-      email,
-      message
-    }
-
-    const variableTypes = {
-      name: 'String',
-      email: 'String!',
-      message: 'String'
-    }
-
-    const response = await graphql(`
-      mutation createContactFormSubmission(${graphqlGenerateVariableDeclarations(variableTypes)}) {
-        insert_contact_form_submissions(objects: {${graphqlGenerateVariablesObject(variables)}}) {
-          affected_rows
+    const result = await client.mutation(graphql(`
+    mutation SubmitContactForm($name: String!, $email: String!, $message: String!) {
+      insert_contact_form_submissions(objects: {email: $email, message: $message, name: $name}) {
+        affected_rows
       }
-    }`, variables, authStore.token)
-    if (response && response.insert_contact_form_submissions) {
-      return response.insert_contact_form_submissions
+    }
+    `), { name, email, message })
+    if (result.error) {
+      throw result.error
     }
   }
 

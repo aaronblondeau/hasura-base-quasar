@@ -39,6 +39,8 @@ module.exports = {
     
   ],
 
+  ignorePatterns: ['src/gql/*.ts'],
+
   plugins: [
     // required to apply rules which need type information
     '@typescript-eslint',
