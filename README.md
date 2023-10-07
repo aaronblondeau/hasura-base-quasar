@@ -28,3 +28,14 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+
+### CodeGen
+
+This demo app uses URQL and [GraphQL Code Generator](https://the-guild.dev/graphql/codegen).
+
+After creating a new query or muation with graphql() you will need to re-run codegen with:
+
+```
+yarn codegen
+```
