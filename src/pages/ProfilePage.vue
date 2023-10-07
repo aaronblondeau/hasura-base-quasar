@@ -215,6 +215,11 @@ async function updateDisplayName () {
   try {
     updateDisplayNameWait.value = true
     await authStore.updateDisplayName(displayName.value)
+    Notify.create({
+      type: 'positive',
+      position: 'top',
+      message: 'Display name has been updated.'
+    })
   } catch (error) {
     notifyError(error)
   } finally {

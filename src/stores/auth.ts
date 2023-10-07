@@ -86,7 +86,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     `), {
       id
-    })
+    }, { cachePolicy: 'network-only', requestPolicy: 'network-only' })
     if (result.error) {
       throw result.error
     }
